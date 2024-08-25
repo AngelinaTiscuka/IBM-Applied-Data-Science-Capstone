@@ -1,4 +1,4 @@
-# Import required libraries
+# Import all required libraries
 import pandas as pd
 import dash
 import dash_html_components as html
@@ -6,7 +6,8 @@ import dash_core_components as dcc
 from dash.dependencies import Input, Output
 import plotly.express as px
 
-# Read the airline data into pandas dataframe
+
+# Read the airline data
 spacex_df = pd.read_csv("spacex_launch_dash.csv")
 max_payload = spacex_df['Payload Mass (kg)'].max()
 min_payload = spacex_df['Payload Mass (kg)'].min()
@@ -63,8 +64,7 @@ app.layout = html.Div(children=[html.H1('SpaceX Launch Records Dashboard',
                                 html.Div(dcc.Graph(id='success-payload-scatter-chart')),
                                 ])
 
-# TASK 2:
-# Add a callback function for `site-dropdown` as input, `success-pie-chart` as output
+# TASK 2: Add a callback function for `site-dropdown` as input, `success-pie-chart` as output
 @app.callback(
      Output(component_id = 'success-pie-chart', component_property = 'figure'),
      [Input(component_id = 'site-dropdown', component_property = 'value')]
@@ -86,8 +86,7 @@ def piegraph_update(site_dropdown):
             )
     return fig
 
-# TASK 4:
-# Add a callback function for `site-dropdown` and `payload-slider` as inputs, `success-payload-scatter-chart` as output
+# TASK 4: Add a callback function for `site-dropdown` and `payload-slider` as inputs, `success-payload-scatter-chart` as output
 @app.callback(
      Output(component_id = 'success-payload-scatter-chart', component_property = 'figure'),
      [Input(component_id = 'site-dropdown', component_property = 'value'), 
